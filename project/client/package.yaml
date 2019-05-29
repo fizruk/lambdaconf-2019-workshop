@@ -1,13 +1,10 @@
-name:                corridor
+name:                corridor-client
 version:             0.1.0.0
 github:              "fizruk/lambdaconf-2019-workshop"
 license:             BSD3
 author:              "Nikolai Kudasov"
 maintainer:          "nickolay.kudasov@gmail.com"
 copyright:           "2019 Nikolai Kudasov"
-
-extra-source-files:
-- README.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -20,13 +17,14 @@ description:         Please see the README on GitHub at <https://github.com/fizr
 
 dependencies:
 - base >= 4.7 && < 5
+- corridor
 - miso
 
 library:
   source-dirs: src
 
 executables:
-  corridor:
+  corridor-client:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -34,4 +32,4 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - corridor
+    - corridor-client

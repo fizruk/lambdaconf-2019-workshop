@@ -1,14 +1,23 @@
 #!/bin/bash
 # NOTE: to be run from inside Docker container
 
-echo -n "Building GHCJS project... "
-stack build
+set -e # exit on failure
+
+echo -n "Building GHCJS part (common + client)... "
+stack build --stack-yaml=stack-ghcjs.yaml
+echo "DONE"
+
+echo -n "Building GHC part (common + server)... "
+stack build --stack-yaml=stack.yaml
 echo "DONE"
 
 echo -n "Deploying static files... "
 cp -r \
-  static/* \
-  "$(stack path --local-install-root)/bin/corridor.jsexe/."
+  client/static/* \
+  "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/corridor-client.jsexe/."
 echo "DONE"
 
 echo "Project built successfully!"
+
+echo "Starting corridor-server..."
+stack exec corridor-server

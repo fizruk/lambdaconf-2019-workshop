@@ -1,6 +1,6 @@
 module Main where
 
-import           Corridor
+import           Corridor.Server (run)
 
 main :: IO ()
 main = run
