@@ -2,9 +2,11 @@ FROM dplusic/stack-ghcjs:lts-7.19
 
 ADD project /project
 
-RUN cd /project && stack setup
-RUN cd /project && stack build --only-dependencies
-
 WORKDIR /project
+
+RUN stack setup --stack-yaml=stack-ghcjs.yaml
+RUN stack build --stack-yaml=stack-ghcjs.yaml --only-dependencies
+
+RUN stack build --stack-yaml=stack.yaml --only-dependencies
 
 CMD ["bash"]

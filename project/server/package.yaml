@@ -18,6 +18,9 @@ description:         Please see the README on GitHub at <https://github.com/fizr
 dependencies:
 - base >= 4.7 && < 5
 - corridor
+- servant
+- servant-server
+- warp
 
 library:
   source-dirs: src

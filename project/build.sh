@@ -20,4 +20,4 @@ echo "DONE"
 echo "Project built successfully!"
 
 echo "Starting corridor-server..."
-stack exec corridor-server
+stack exec corridor-server -- "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/corridor-client.jsexe/"
