@@ -18,9 +18,12 @@ description:         Please see the README on GitHub at <https://github.com/fizr
 dependencies:
 - base >= 4.7 && < 5
 - corridor
+- network
+- process
 - servant
 - servant-server
 - warp
+- warp-tls
 
 library:
   source-dirs: src

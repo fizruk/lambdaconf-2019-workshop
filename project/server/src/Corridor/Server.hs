@@ -4,12 +4,17 @@ module Corridor.Server where
 
 import           Servant
 
-import           Corridor
+import           Corridor.Game
 
-type API = "static" :> Raw
+-- | Corridor server API specification.
+type API = "play" :> Raw
 
+-- | Term-level representation of 'API'.
 api :: Proxy API
 api = Proxy
 
-server :: FilePath -> Server Raw
+-- | Server implementing 'API'.
+server
+  :: FilePath   -- ^ Where to serve static files from?
+  -> Server API
 server staticDir = Servant.serveDirectory staticDir
