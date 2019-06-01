@@ -8,7 +8,7 @@ if [ -z "$cmd" ]; then
   echo "Usage: $0 <command>"
 
   echo "Available commands:"
-  for path in $(ls project/*.sh);
+  for path in $(ls project/scripts/*.sh);
   do
     filename=$(basename "$path")
     echo "  - ${filename%.*}"
@@ -26,5 +26,5 @@ else
     -e LOCAL_IP_ADDRESS="$local_ip" \
     -v $(pwd)/project:/project \
     -it fizruk/stack-ghcjs:lts-7.19 \
-    "./${cmd}.sh"
+    "./scripts/${cmd}.sh"
 fi
