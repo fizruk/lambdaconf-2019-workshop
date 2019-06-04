@@ -23,6 +23,7 @@ mainWith hostname args =
       putStrLn $ "Static files served from " ++ staticDir
       putStrLn $ "Starting corridor-server at " ++ serverUrl
       putStrLn "------------------------------------------------------------"
+      putStrLn $ "Open VR application (on a desktop) at\n" ++ desktopUrl
       putStrLn $ "Open AR application (on a smartphone) at " ++ mainUrl
       putStrLn $ "Open AR marker (on a desktop) at\n" ++ markerUrl
       putStrLn "------------------------------------------------------------"
@@ -33,8 +34,10 @@ mainWith hostname args =
   where
     port = 8019
     serverUrl = "https://" ++ hostname ++ ":" ++ show port
+    localhostUrl = "https://localhost:" ++ show port
     mainUrl = serverUrl ++ "/play/" -- NOTE: trailing slash is important!
-    markerUrl = mainUrl ++ "assets/markers/lc-2019-marker.png"
+    markerUrl = localhostUrl ++ "/play/assets/markers/lc-2019-marker.png"
+    desktopUrl = localhostUrl ++ "/play/desktop.html"
     settings = Warp.defaultSettings
       & Warp.setPort port
 
