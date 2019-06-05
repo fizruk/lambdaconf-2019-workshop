@@ -54,8 +54,8 @@ updateModel (InGameAction gameAction) (Model game n)
 -- | Model rendering (in HTML).
 viewModel :: Model -> View Action
 viewModel (Model game _)
---  = sceneVR markerScene
-  = sceneAR markerScene
+  = sceneVR markerScene
+-- = sceneAR markerScene
   where
     -- markerScene = asciiToVoxels haskellLogo
     markerScene = drawTicTacToe (gameBoard game)
