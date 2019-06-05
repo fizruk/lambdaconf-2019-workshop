@@ -25,11 +25,17 @@ sceneVR wrapped = nodeHtml "a-scene" []
 
 -- | Set up an AR scene.
 sceneAR :: [View action] -> View action
-sceneAR wrapped = nodeHtml "a-scene" [ prop_ "embedded" "", prop_ "arjs" "" ]
+sceneAR wrapped = nodeHtml "a-scene"
+  [ prop_ "embedded" ""
+  , prop_ "arjs" "sourceType: webcam; debugUIEnabled: false;"
+  , prop_ "vr-mode-ui" "enabled: false"
+  ]
   [ nodeHtml "a-marker"
       [ prop_ "preset" "custom"
       , prop_ "type" "pattern"
       , prop_ "url" "assets/markers/lc-2019-marker.patt"
+      , prop_ "emitevents" "true"
+      , prop_ "cursor" "rayOrigin: mouse"
       ]
       wrapped
   , nodeHtml "a-entity" [ prop_ "camera" "" ] []
