@@ -6,7 +6,7 @@ packages:
  - ar-cube
  - ar-cube-client
 extra-deps:
- - miso-0.21.2.0
+ - miso-0.21.1.0
 
 setup-info:
   ghcjs:
