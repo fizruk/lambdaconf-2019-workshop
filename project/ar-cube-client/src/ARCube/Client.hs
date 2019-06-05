@@ -1,25 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 module ARCube.Client where
 
-import           Data.Function ((&))
-import           Data.List     (intercalate)
-import           Data.Monoid
-import           Miso
-import           Miso.String   (MisoString, ms)
+import           Miso         (App (App), Effect, View)
+import qualified Miso
 
 import           ARCube.Game
-import           ARCube.Utils  (sceneAR, sceneVR)
+import           ARCube.Utils (sceneAR, sceneVR)
 
 -- | Run client application.
 run :: Mode -> IO ()
-run mode = startApp App
-  { initialAction   = initAction
-  , model           = initialModel
-  , update          = updateModel
-  , view            = viewModel mode
-  , subs            = [ ]
-  , events          = defaultEvents
-  , mountPoint      = Nothing
+run mode = Miso.startApp App
+  { Miso.initialAction   = initAction
+  , Miso.model           = initialModel
+  , Miso.update          = updateModel
+  , Miso.view            = viewModel mode
+  , Miso.subs            = [ ]
+  , Miso.events          = Miso.defaultEvents
+  , Miso.mountPoint      = Nothing
   }
 
 -- | Mode to run.
