@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Corridor.Client where
+module ARCube.Client where
 
-import           Corridor.Game
+import           ARCube.Game
 import           Data.Function ((&))
 import           Data.List     (intercalate)
 import           Data.Monoid
@@ -54,8 +54,8 @@ updateModel (InGameAction gameAction) (Model game n)
 -- | Model rendering (in HTML).
 viewModel :: Model -> View Action
 viewModel (Model game _)
---  = sceneVR markerScene
-  = sceneAR markerScene
+  = sceneVR markerScene
+--  = sceneAR markerScene
   where
     -- markerScene = asciiToVoxels haskellLogo
     markerScene = drawTicTacToe (gameBoard game)
@@ -81,8 +81,8 @@ sceneAR wrapped = nodeHtml "a-scene" [ prop_ "embedded" "", prop_ "arjs" "" ]
       , prop_ "url" "assets/markers/lc-2019-marker.patt"
       ]
       [ nodeHtml "a-entity"
-          [ prop_ "rotation" "-90 0 0" ]
-          wrapped
+          [] -- prop_ "rotation" "-90 0 0" ]
+          (wrapped <> asciiToVoxels haskellLogo)
       , box' 0.1 0.1 0.1 [ prop_ "color" "blue" ]
       ]
   , nodeHtml "a-entity" [ prop_ "camera" "" ] []

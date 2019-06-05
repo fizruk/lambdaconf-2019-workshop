@@ -9,4 +9,6 @@ RUN stack build --stack-yaml=stack-ghcjs.yaml --only-dependencies
 
 RUN stack build --stack-yaml=stack.yaml --only-dependencies
 
+RUN stack install ghcid-0.7.4 extra-1.6.6
+
 CMD ["bash"]

@@ -11,7 +11,7 @@ git clone https://github.com/fizruk/lambdaconf-2019-workshop.git
 Pull docker image:
 
 ```sh
-docker pull fizruk/stack-ghcjs:lts-7.19
+docker pull fizruk/stack-ghcjs:ar-cube
 ```
 
 ## Make sure everything is fine
@@ -33,10 +33,10 @@ Now run server:
 You should see an output similar to this:
 
 ```
-Starting corridor-server...
+Starting ar-cube-server...
 ============================================================
-Static files served from /project/.stack-work/install/x86_64-linux/lts-7.19/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/corridor-client.jsexe/
-Starting corridor-server at https://localhost:8019
+Static files served from /project/.stack-work/install/x86_64-linux/lts-7.19/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/ar-cube-client.jsexe/
+Starting ar-cube-server at https://localhost:8019
 ------------------------------------------------------------
 Open AR application (on a smartphone) at https://10.0.1.13:8019/play/
 Open AR marker (on a desktop) at

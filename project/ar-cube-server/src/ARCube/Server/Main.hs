@@ -1,4 +1,4 @@
-module Corridor.Server.Main where
+module ARCube.Server.Main where
 
 import           Data.Function               ((&))
 import           Data.Maybe                  (fromMaybe)
@@ -9,7 +9,7 @@ import qualified Servant
 import qualified System.Environment          as System
 import qualified System.Process              as System
 
-import           Corridor.Server             (api, server)
+import           ARCube.Server               (api, server)
 
 -- | Entry point parametrised by some options.
 --
@@ -21,7 +21,7 @@ mainWith hostname args =
     staticDir : _ -> do
       putStrLn "============================================================"
       putStrLn $ "Static files served from " ++ staticDir
-      putStrLn $ "Starting corridor-server at " ++ serverUrl
+      putStrLn $ "Starting ar-cube-server at " ++ serverUrl
       putStrLn "------------------------------------------------------------"
       putStrLn $ "Open VR application (on a desktop) at\n" ++ desktopUrl
       putStrLn $ "Open AR application (on a smartphone) at " ++ mainUrl
@@ -61,7 +61,7 @@ devStaticDir :: IO FilePath
 devStaticDir = do
   localInstallRoot <- concat . lines <$> System.readProcess "stack"
     ["path", "--stack-yaml=stack-ghcjs.yaml", "--local-install-root"] ""
-  return (localInstallRoot ++ "/bin/corridor-client.jsexe/")
+  return (localInstallRoot ++ "/bin/ar-cube-client.jsexe/")
 
 -- | Try extracting local host name from @LOCAL_IP_ADDRESS@ variable.
 localHostName :: IO (Maybe HostName)

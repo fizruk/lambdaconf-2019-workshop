@@ -1,6 +1,6 @@
 module Main where
 
-import           Corridor.Server.Main (defaultMain)
+import           ARCube.Server.Main (defaultMain)
 
 main :: IO ()
 main = defaultMain

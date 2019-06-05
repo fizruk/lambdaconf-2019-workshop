@@ -5,8 +5,8 @@ set -e # exit on failure
 
 echo -n "Deploying static files... "
 cp -r \
-  client/static/* \
-  "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/corridor-client.jsexe/."
+  ar-cube-client/static/* \
+  "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client.jsexe/." || true
 echo "DONE"
 
 echo -n "Launching GHCi for (common + server)... "

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 
-name:           corridor
+name:           ar-cube-server
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/fizruk/lambdaconf-2019-workshop#readme>
 homepage:       https://github.com/fizruk/lambdaconf-2019-workshop#readme
@@ -23,6 +23,31 @@ library
       src
   build-depends:
       base >= 4.7 && < 5
+    , ar-cube
+    , network
+    , process
+    , servant
+    , servant-server
+    , warp
+    , warp-tls
   exposed-modules:
-      Corridor.Game
+      ARCube.Server
+      ARCube.Server.Main
+  default-language: Haskell2010
+
+executable ar-cube-server
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >= 4.7 && < 5
+    , ar-cube
+    , network
+    , process
+    , servant
+    , servant-server
+    , warp
+    , warp-tls
+    , ar-cube-server
   default-language: Haskell2010

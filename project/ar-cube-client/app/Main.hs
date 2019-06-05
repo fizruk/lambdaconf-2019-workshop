@@ -1,6 +1,6 @@
 module Main where
 
-import           Corridor.Client (run)
+import           ARCube.Client (run)
 
 main :: IO ()
 main = run

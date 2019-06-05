@@ -3,8 +3,8 @@
 
 set -e # exit on failure
 
-STATIC_SRC="$(pwd)/client/static/."
-STATIC_DST="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/corridor-client.jsexe/"
+STATIC_SRC="$(pwd)/ar-cube-client/static/."
+STATIC_DST="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client.jsexe/"
 
 stack build --stack-yaml=stack-ghcjs.yaml \
   --file-watch \

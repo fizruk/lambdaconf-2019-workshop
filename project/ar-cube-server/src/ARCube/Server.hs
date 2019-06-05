@@ -1,12 +1,12 @@
 {-# LANGUAGE DataKinds     #-}
 {-# LANGUAGE TypeOperators #-}
-module Corridor.Server where
+module ARCube.Server where
 
 import           Servant
 
-import           Corridor.Game
+import           ARCube.Game
 
--- | Corridor server API specification.
+-- | AR Cube server API specification.
 type API = "play" :> Raw
 
 -- | Term-level representation of 'API'.

@@ -1,4 +1,4 @@
-name:                corridor-server
+name:                ar-cube
 version:             0.1.0.0
 github:              "fizruk/lambdaconf-2019-workshop"
 license:             BSD3
@@ -17,24 +17,7 @@ description:         Please see the README on GitHub at <https://github.com/fizr
 
 dependencies:
 - base >= 4.7 && < 5
-- corridor
-- network
-- process
-- servant
-- servant-server
-- warp
-- warp-tls
+- miso
 
 library:
   source-dirs: src
-
-executables:
-  corridor-server:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - corridor-server

@@ -1,24 +1,39 @@
 {-# LANGUAGE EmptyCase  #-}
 {-# LANGUAGE LambdaCase #-}
-module Corridor.Game where
+module ARCube.Game where
 
 import           Data.List  (transpose)
 import           Data.Maybe (listToMaybe)
 
--- import           Miso
+import           Miso
 
 -- | Model of the game state.
 data Game = Game
-  { gameBoard :: Board
-  } deriving (Eq)
+  { gameCube   :: Cube
+  , gamePlayer :: Mark
+  } deriving (Eq, Show)
 
--- | Coordinates on a board.
-type Coords = (Int, Int)
+-- | Coordinates in a cube.
+type Coords = (Int, Int, Int)
+
+data Axis = AxisX | AxisY | AxisZ
+  deriving (Eq, Show)
+
+data Slice = Slice
+  { sliceAxis  :: Axis   -- ^ Which axis goes through the center of the slice?
+  , sliceIndex :: Int    -- ^ Index of a slice along the axis.
+  } deriving (Eq, Show)
+
+data Direction
+  = Clockwise
+  | Counterclockwise
+  deriving (Eq, Show)
 
 -- | Possible in-game actions.
 data GameAction
-  = SetMark Mark Coords   -- ^ Try put a mark on a board cell.
-  deriving (Show)
+  = SetMark     Mark Coords     -- ^ Try put a mark in a cube.
+  | RotateSlice Slice Direction -- ^ Rotate one of the cube's slices.
+  deriving (Eq, Show)
 
 -- | Initialise game state.
 initGame :: Game

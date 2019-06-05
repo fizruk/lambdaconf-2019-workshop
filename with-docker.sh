@@ -25,6 +25,6 @@ else
     $DOCKER_OPTIONS \
     -e LOCAL_IP_ADDRESS="$local_ip" \
     -v $(pwd)/project:/project \
-    -it fizruk/stack-ghcjs:lts-7.19 \
+    -it fizruk/stack-ghcjs:ar-cube \
     "./scripts/${cmd}.sh"
 fi

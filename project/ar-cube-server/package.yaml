@@ -1,4 +1,4 @@
-name:                corridor-client
+name:                ar-cube-server
 version:             0.1.0.0
 github:              "fizruk/lambdaconf-2019-workshop"
 license:             BSD3
@@ -15,19 +15,21 @@ copyright:           "2019 Nikolai Kudasov"
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/fizruk/lambdaconf-2019-workshop#readme>
 
-extra-source-files:
-  static/index.html
-
 dependencies:
 - base >= 4.7 && < 5
-- corridor
-- miso
+- ar-cube
+- network
+- process
+- servant
+- servant-server
+- warp
+- warp-tls
 
 library:
   source-dirs: src
 
 executables:
-  corridor-client:
+  ar-cube-server:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -35,4 +37,4 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - corridor-client
+    - ar-cube-server

@@ -13,8 +13,8 @@ echo "DONE"
 
 echo -n "Deploying static files... "
 cp -r \
-  client/static/* \
-  "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/corridor-client.jsexe/."
+  ar-cube-client/static/* \
+  "$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client.jsexe/."
 echo "DONE"
 
 echo "Project built successfully!"
