@@ -59,3 +59,16 @@ your desktop!
 The result should look like this:
 
 ![AR demo.](images/ar_demo.jpg)
+
+## Troubleshooting
+
+On Linux might have to install `ifconfig`, for instance on Ubuntu:
+
+```
+apt-get update
+apt-get install net-tools
+```
+
+You might also need to add yourself to the `docker` group.
+See [this answer on AskUbuntu](https://askubuntu.com/a/477554)
+that might help.
