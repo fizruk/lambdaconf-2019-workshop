@@ -21,12 +21,16 @@ source-repository head
 library
   hs-source-dirs:
       src
+  ghc-options: -Wall -fno-warn-type-defaults
   build-depends:
       base >= 4.7 && < 5
     , miso
   exposed-modules:
       ARCube.Game
+      ARCube.Game.Solution.Stage_1
+      ARCube.Game.Solution.Stage_2
       ARCube.Game.Stage_0
+      ARCube.Game.Stage_1
       ARCube.Utils
       ARCube.Utils.AFrame
       ARCube.Utils.HaskellLogo

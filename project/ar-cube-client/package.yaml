@@ -16,7 +16,14 @@ copyright:           "2019 Nikolai Kudasov"
 description:         Please see the README on GitHub at <https://github.com/fizruk/lambdaconf-2019-workshop#readme>
 
 extra-source-files:
-  static/index.html
+- 'static/*.html'
+- 'static/assets/js/*.js'
+- 'static/assets/js/*.map'
+- 'static/assets/markers/*.patt'
+- 'static/assets/markers/*.png'
+
+ghc-options:
+- -Wall -fno-warn-type-defaults
 
 dependencies:
 - base >= 4.7 && < 5

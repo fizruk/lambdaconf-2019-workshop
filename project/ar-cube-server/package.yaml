@@ -15,6 +15,9 @@ copyright:           "2019 Nikolai Kudasov"
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/fizruk/lambdaconf-2019-workshop#readme>
 
+ghc-options:
+- -Wall -fno-warn-type-defaults
+
 dependencies:
 - base >= 4.7 && < 5
 - ar-cube
