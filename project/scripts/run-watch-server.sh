@@ -7,7 +7,7 @@ STATIC_DIR_VR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/
 STATIC_DIR_AR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client-ar.jsexe/"
 
 # build server for the first time
-stack build --stack-yaml=stack.yaml
+stack build --stack-yaml=stack.yaml --fast
 
 # automatically restart server if it shuts down
 while true; do
@@ -22,5 +22,5 @@ done & # do restarts in background
 # Thanks for this idea to a reply in a Reddit thread:
 # https://www.reddit.com/r/haskell/comments/44b5rv/rebuild_restart_program_on_file_change/czov7j6/
 stack build --stack-yaml=stack.yaml \
-  --file-watch \
+  --file-watch --fast \
   --exec "killall ar-cube-server" # force restart after rebuild
