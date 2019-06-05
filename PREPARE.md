@@ -35,12 +35,15 @@ You should see an output similar to this:
 ```
 Starting ar-cube-server...
 ============================================================
-Static files served from /project/.stack-work/install/x86_64-linux/lts-7.19/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/ar-cube-client.jsexe/
-Starting ar-cube-server at https://localhost:8019
+Static files (VR) served from /project/.stack-work/install/x86_64-linux/lts-7.19/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/ar-cube-client-vr.jsexe/
+Static files (AR) served from /project/.stack-work/install/x86_64-linux/lts-7.19/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/ar-cube-client-ar.jsexe/
+Starting ar-cube-server at https://10.218.135.182:8019
 ------------------------------------------------------------
-Open AR application (on a smartphone) at https://10.0.1.13:8019/play/
-Open AR marker (on a desktop) at
-https://localhost:8019/play/assets/markers/lc-2019-marker.png
+Local VR at https://localhost:8019/vr/vr.html
+Open VR at https://10.218.135.182:8019/vr/vr.html
+Open AR at https://10.218.135.182:8019/ar/ar.html
+AR marker (open on desktop) at
+https://localhost:8019/ar/assets/markers/lc-2019-marker.png
 ------------------------------------------------------------
 ```
 
@@ -49,7 +52,7 @@ on your smartphone (using whatever local IP address you computer has),
 allow the app to use smartphone's camera and point it to the marker on
 your desktop!
 
-[ar_marker]: project/client/static/assets/markers/lc-2019-marker.png
+[ar_marker]: project/ar-cube-client/static/assets/markers/lc-2019-marker.png
 
 ![AR marker.][ar_marker]
 
