@@ -29,8 +29,10 @@ library
       ARCube.Game
       ARCube.Game.Solution.Stage_1
       ARCube.Game.Solution.Stage_2
+      ARCube.Game.Solution.Stage_3
       ARCube.Game.Stage_0
       ARCube.Game.Stage_1
+      ARCube.Game.Stage_2
       ARCube.Utils
       ARCube.Utils.AFrame
       ARCube.Utils.HaskellLogo

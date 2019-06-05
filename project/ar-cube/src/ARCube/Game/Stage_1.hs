@@ -8,10 +8,10 @@ import           Miso
 
 import           ARCube.Utils
 
--- NOTE: remove _excercise and fix all type holes
+-- NOTE: remove _exercise and fix all type holes
 -- to complete this stage
-_excercise :: a
-_excercise = undefined
+_exercise :: a
+_exercise = undefined
 
 -- | Model of the game state (empty for now).
 data Game = Game
@@ -45,5 +45,5 @@ cell = scaled 0.9 0.9 0.9 (box
 
 -- | A 3x3 cube.
 cube3x3 :: [View action]
-cube3x3 = _excercise  -- Hint: what are the coordinates of cells?
+cube3x3 = _exercise  -- Hint: what are the coordinates of cells?
 
