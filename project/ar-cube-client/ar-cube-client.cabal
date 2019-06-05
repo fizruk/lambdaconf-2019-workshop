@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 
-name:           ar-cube
+name:           ar-cube-client
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/fizruk/lambdaconf-2019-workshop#readme>
 homepage:       https://github.com/fizruk/lambdaconf-2019-workshop#readme
@@ -14,6 +14,9 @@ license:        BSD3
 build-type:     Simple
 cabal-version:  >= 1.10
 
+extra-source-files:
+    static/index.html
+
 source-repository head
   type: git
   location: https://github.com/fizruk/lambdaconf-2019-workshop
@@ -23,12 +26,32 @@ library
       src
   build-depends:
       base >= 4.7 && < 5
+    , ar-cube
     , miso
   exposed-modules:
-      ARCube.Game
-      ARCube.Game.Stage_0
-      ARCube.Utils
-      ARCube.Utils.AFrame
-      ARCube.Utils.HaskellLogo
-      ARCube.Utils.Miso
+      ARCube.Client
+  default-language: Haskell2010
+
+executable ar-cube-client-ar
+  main-is: Main.hs
+  hs-source-dirs:
+      ar/
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >= 4.7 && < 5
+    , ar-cube
+    , miso
+    , ar-cube-client
+  default-language: Haskell2010
+
+executable ar-cube-client-vr
+  main-is: Main.hs
+  hs-source-dirs:
+      vr/
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >= 4.7 && < 5
+    , ar-cube
+    , miso
+    , ar-cube-client
   default-language: Haskell2010

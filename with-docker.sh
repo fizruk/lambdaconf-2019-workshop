@@ -15,7 +15,7 @@ if [ -z "$cmd" ]; then
   done
 else
   DOCKER_OPTIONS=""
-  if [[ $cmd == "run" ]] || [[ $cmd == "run-watch-server" ]] || [[ $cmd == "repl" ]]; then
+  if [[ $cmd == "run" ]] || [[ $cmd == "run-watch-server" ]]; then
     DOCKER_OPTIONS="-p $SERVER_PORT:$SERVER_PORT" # expose server ports
   fi
 

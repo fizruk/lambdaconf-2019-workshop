@@ -27,9 +27,18 @@ library:
   source-dirs: src
 
 executables:
-  ar-cube-client:
+  ar-cube-client-vr:
     main:                Main.hs
-    source-dirs:         app
+    source-dirs:         vr/
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - ar-cube-client
+  ar-cube-client-ar:
+    main:                Main.hs
+    source-dirs:         ar/
     ghc-options:
     - -threaded
     - -rtsopts
