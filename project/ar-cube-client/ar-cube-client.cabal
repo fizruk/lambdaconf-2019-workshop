@@ -35,7 +35,9 @@ library
   build-depends:
       base >= 4.7 && < 5
     , ar-cube
+    , ghcjs-base
     , miso
+    , stm
   exposed-modules:
       ARCube.Client
   default-language: Haskell2010
@@ -48,7 +50,9 @@ executable ar-cube-client-ar
   build-depends:
       base >= 4.7 && < 5
     , ar-cube
+    , ghcjs-base
     , miso
+    , stm
     , ar-cube-client
   default-language: Haskell2010
 
@@ -60,6 +64,8 @@ executable ar-cube-client-vr
   build-depends:
       base >= 4.7 && < 5
     , ar-cube
+    , ghcjs-base
     , miso
+    , stm
     , ar-cube-client
   default-language: Haskell2010

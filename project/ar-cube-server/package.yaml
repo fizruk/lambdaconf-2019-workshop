@@ -21,12 +21,19 @@ ghc-options:
 dependencies:
 - base >= 4.7 && < 5
 - ar-cube
+- bytestring
+- containers
+- http-types
 - network
 - process
 - servant
 - servant-server
+- stm
+- wai
+- wai-websockets
 - warp
 - warp-tls
+- websockets
 
 library:
   source-dirs: src

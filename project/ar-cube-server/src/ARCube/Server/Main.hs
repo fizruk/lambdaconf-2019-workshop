@@ -1,5 +1,6 @@
 module ARCube.Server.Main where
 
+import           Control.Concurrent          (forkIO)
 import           Data.Function               ((&))
 import           Data.Maybe                  (fromMaybe)
 import           Network.Socket              (HostName)
@@ -9,7 +10,8 @@ import qualified Servant
 import qualified System.Environment          as System
 import qualified System.Process              as System
 
-import           ARCube.Server               (api, server)
+import           ARCube.Server               (api, mkDefaultConfig,
+                                              periodicUpdates, server)
 
 -- | Entry point parametrised by some options.
 --
@@ -29,8 +31,10 @@ mainWith hostname args =
       putStrLn $ "Open AR at " ++ arUrl
       putStrLn $ "AR marker (open on desktop) at\n" ++ markerUrl
       putStrLn "------------------------------------------------------------"
+      config <- mkDefaultConfig
+      forkIO $ periodicUpdates 10000 config   -- update Universe every 10 milliseconds
       Warp.runTLS Warp.defaultTlsSettings settings $
-        Servant.serve api (server vrDir arDir)
+        Servant.serve api (server vrDir arDir config)
     _ -> do
       putStrLn "Directory with static files not provided!"
   where

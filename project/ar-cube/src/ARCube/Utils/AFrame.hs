@@ -2,6 +2,7 @@
 module ARCube.Utils.AFrame where
 
 import qualified Data.List         as List
+import           Data.Monoid       ((<>))
 import           Miso
 import           Miso.String       (MisoString, ToMisoString (..), ms)
 
@@ -65,6 +66,21 @@ rotated x y z = wrapEntity [ prop_ "rotation" (msListOf show [x, y, z]) ]
 
 scaled :: Float -> Float -> Float -> [View action] -> [View action]
 scaled x y z = wrapEntity [ prop_ "scale" (msListOf show [x, y, z]) ]
+
+rotatedAnim
+  :: MisoString
+  -> (Float, Float, Float)
+  -> (Float, Float, Float)
+  -> [View action]
+  -> [View action]
+rotatedAnim name (fx, fy, fz) (tx, ty, tz) = wrapEntity
+  [ prop_ ("animation__" <> name) $ mconcat
+     [ "property: rotation; "
+     , "from: " <> msListOf show [fx, fy, fz] <> "; "
+     , "to: "   <> msListOf show [tx, ty, tz] <> "; "
+     , "dur: 1000"
+     , "easing: easeInOutSine"
+     ] ]
 
 -- * Helpers
 

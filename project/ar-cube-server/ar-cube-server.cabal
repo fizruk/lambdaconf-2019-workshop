@@ -25,12 +25,19 @@ library
   build-depends:
       base >= 4.7 && < 5
     , ar-cube
+    , bytestring
+    , containers
+    , http-types
     , network
     , process
     , servant
     , servant-server
+    , stm
+    , wai
+    , wai-websockets
     , warp
     , warp-tls
+    , websockets
   exposed-modules:
       ARCube.Server
       ARCube.Server.Main
@@ -44,11 +51,18 @@ executable ar-cube-server
   build-depends:
       base >= 4.7 && < 5
     , ar-cube
+    , bytestring
+    , containers
+    , http-types
     , network
     , process
     , servant
     , servant-server
+    , stm
+    , wai
+    , wai-websockets
     , warp
     , warp-tls
+    , websockets
     , ar-cube-server
   default-language: Haskell2010

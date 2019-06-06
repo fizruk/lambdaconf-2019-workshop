@@ -28,7 +28,9 @@ ghc-options:
 dependencies:
 - base >= 4.7 && < 5
 - ar-cube
+- ghcjs-base
 - miso
+- stm
 
 library:
   source-dirs: src

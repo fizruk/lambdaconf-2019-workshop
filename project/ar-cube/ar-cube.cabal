@@ -24,15 +24,18 @@ library
   ghc-options: -Wall -fno-warn-type-defaults
   build-depends:
       base >= 4.7 && < 5
+    , binary
     , miso
   exposed-modules:
       ARCube.Game
       ARCube.Game.Solution.Stage_1
       ARCube.Game.Solution.Stage_2
       ARCube.Game.Solution.Stage_3
+      ARCube.Game.Solution.Stage_4
       ARCube.Game.Stage_0
       ARCube.Game.Stage_1
       ARCube.Game.Stage_2
+      ARCube.Game.Stage_3
       ARCube.Utils
       ARCube.Utils.AFrame
       ARCube.Utils.HaskellLogo
