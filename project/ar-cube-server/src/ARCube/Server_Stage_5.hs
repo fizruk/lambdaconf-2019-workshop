@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE TypeOperators     #-}
-module ARCube.Server where
+module ARCube.Server_Stage_5 where
 
 import           Control.Concurrent             (forkIO, threadDelay)
 import           Control.Concurrent.STM
@@ -19,7 +19,7 @@ import           Network.WebSockets
 import           Servant
 
 
-import           ARCube.Game
+import           ARCube.Game.Stage_5
 
 -- | AR Cube server API specification.
 type API

@@ -1,9 +1,10 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
-module ARCube.Game.Solution.Stage_4 where
+module ARCube.Game.Solution.Stage_5 where
 
 import           Data.Function ((&))
 import           Data.Maybe    (maybe)
+import           Data.Monoid   ((<>))
 import           Miso
 import           Miso.String   (ms)
 
@@ -11,11 +12,30 @@ import           ARCube.Utils
 
 -- | Model of the game state (empty for now).
 data Game = Game
-  { gMarked        :: [Coords]            -- ^ Marked cells.
-  , gFocus         :: Maybe Coords        -- ^ Cell in focus.
+  { gMarked1       :: [Coords]            -- ^ Marked cells by Player 1.
+  , gMarked2       :: [Coords]            -- ^ Marked cells by Player 2.
+  , gFocus         :: Maybe Coords        -- ^ Current player's focus.
+  , gCurrentPlayer :: Player              -- ^ Current player.
   , gSliceRotation :: Maybe SliceRotation -- ^ Latest rotated slice.
   , gRotationCount :: Int                 -- ^ Counter for slice rotation animations.
   } deriving (Eq, Show, Read)
+
+-- | A player is one of two.
+data Player = Player1 | Player2
+  deriving (Eq, Show, Read)
+
+switchPlayer :: Player -> Player
+switchPlayer Player1 = Player2
+switchPlayer Player2 = Player1
+
+gMarked :: Game -> [Coords]
+gMarked = gMarked1 <> gMarked2
+
+unsafeMarkCell :: Coords -> Game -> Game
+unsafeMarkCell coords game =
+  case gCurrentPlayer game of
+    Player1 -> game { gMarked1 = coords : gMarked1 game }
+    Player2 -> game { gMarked2 = coords : gMarked2 game }
 
 -- | Possible in-game actions (empty for now).
 data GameAction
@@ -41,7 +61,7 @@ type Rotation = (Float, Float, Float)
 
 -- | Initialise game state.
 initGame :: Game
-initGame = Game [] Nothing Nothing 0
+initGame = Game [] [] Nothing Player1 Nothing 0
 
 -- | Game event handler.
 handleGame :: GameAction -> Game -> Game
@@ -53,14 +73,16 @@ handleGame (SetFocus coords) game = game
 handleGame (SetMark coords) game
   | coords `elem` gMarked game = handleGame
       (RotateSlice (toSliceRotation coords)) game
-  | otherwise = game
-      { gMarked = coords : gMarked game
-      , gSliceRotation = Nothing
+  | otherwise = (unsafeMarkCell coords game)
+      { gSliceRotation = Nothing
+      , gCurrentPlayer = switchPlayer (gCurrentPlayer game)
       }
 handleGame (RotateSlice sr) game = game
-  { gMarked = maybe id (map . rotateCoords) sr (gMarked game)
+  { gMarked1 = maybe id (map . rotateCoords) sr (gMarked1 game)
+  , gMarked2 = maybe id (map . rotateCoords) sr (gMarked2 game)
   , gSliceRotation = sr
   , gRotationCount = 1 + gRotationCount game
+  , gCurrentPlayer = switchPlayer (gCurrentPlayer game)
   }
 
 -- | Determine which slice to rotate and how based on a cell.
@@ -105,7 +127,7 @@ renderGame game = cube3x3 game
 -- | Render 3x3 cube with interactive cells.
 cube3x3 :: Game -> [View GameAction]
 cube3x3 game = concat
-  [ cell isMarked isFocus coords
+  [ cell game coords
     & translated x y z
     & animateRotation coords
   | i <- [-1, 0, 1]
@@ -114,8 +136,6 @@ cube3x3 game = concat
   , (i, j, k) /= (0, 0, 0)  -- don't render internal cell
   , let coords = (i, j, k)
         [x, y, z] = map fromIntegral [i, j, k]
-        isMarked = coords `elem` gMarked game
-        isFocus  = Just coords == gFocus game
   ]
   where
     animateRotation coords =
@@ -126,8 +146,8 @@ cube3x3 game = concat
     n = ms (show (gRotationCount game))
 
 -- | Render an interactive cube cell.
-cell :: Bool -> Bool -> Coords -> [View GameAction]
-cell isMarked isFocus coords = scaled 0.9 0.9 0.9 (box
+cell :: Game -> Coords -> [View GameAction]
+cell game coords = scaled 0.9 0.9 0.9 (box
   [ prop_ "color"   color
   , prop_ "opacity" "0.5"
   , onClick (SetMark coords)
@@ -135,7 +155,13 @@ cell isMarked isFocus coords = scaled 0.9 0.9 0.9 (box
   , onMouseLeave (ResetFocus coords)
   ])
   where
+    isMarked1 = coords `elem` gMarked1 game
+    isMarked2 = coords `elem` gMarked2 game
+    isFocus   = Just coords == gFocus game
     color
-      | isMarked  = "red"
-      | isFocus   = "orange"
-      | otherwise = "yellow"
+      | isMarked1 = "orange"
+      | isMarked2 = "blue"
+      | isFocus = case gCurrentPlayer game of
+                    Player1 -> "yellow"
+                    Player2 -> "cyan"
+      | otherwise = "white"

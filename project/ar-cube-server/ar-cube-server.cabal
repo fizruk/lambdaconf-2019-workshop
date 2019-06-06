@@ -41,6 +41,7 @@ library
   exposed-modules:
       ARCube.Server
       ARCube.Server.Main
+      ARCube.Server_Stage_5
   default-language: Haskell2010
 
 executable ar-cube-server

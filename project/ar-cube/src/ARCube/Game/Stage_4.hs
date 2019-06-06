@@ -1,6 +1,6 @@
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
-module ARCube.Game.Solution.Stage_4 where
+module ARCube.Game.Stage_4 where
 
 import           Data.Function ((&))
 import           Data.Maybe    (maybe)
@@ -8,6 +8,11 @@ import           Miso
 import           Miso.String   (ms)
 
 import           ARCube.Utils
+
+-- NOTE: remove _exercise and fix all type holes
+-- to complete this stage
+_exercise :: a
+_exercise = error "Exercise in Stage 4 is not implemented!"
 
 -- | Model of the game state (empty for now).
 data Game = Game
@@ -51,15 +56,14 @@ handleGame (ResetFocus coords) game
 handleGame (SetFocus coords) game = game
   { gFocus = Just coords }
 handleGame (SetMark coords) game
-  | coords `elem` gMarked game = handleGame
-      (RotateSlice (toSliceRotation coords)) game
+  | coords `elem` gMarked game = handleGame (RotateSlice _exercise) game
   | otherwise = game
       { gMarked = coords : gMarked game
-      , gSliceRotation = Nothing
+      , gSliceRotation = _exercise
       }
 handleGame (RotateSlice sr) game = game
-  { gMarked = maybe id (map . rotateCoords) sr (gMarked game)
-  , gSliceRotation = sr
+  { gMarked        = _exercise
+  , gSliceRotation = _exercise
   , gRotationCount = 1 + gRotationCount game
   }
 
@@ -120,10 +124,10 @@ cube3x3 game = concat
   where
     animateRotation coords =
       case gSliceRotation game of
-        Just sr@(SliceRotation axis _) | inSliceRotation coords sr
-          -> rotatedAnim n (axisRotation axis) (0, 0, 0)
+        Just _ | _exercise  -- determine when to animate rotation for a cell
+          -> _exercise      -- animate rotation
         _ -> rotatedAnim n (0, 0, 0) (0, 0, 0) -- NOTE: simply removing animation does not work!
-    n = ms (show (gRotationCount game))
+    n = ms (show (gRotationCount game)) -- NOTE: this counter fixes problems with A-Frame animation after rerendering
 
 -- | Render an interactive cube cell.
 cell :: Bool -> Bool -> Coords -> [View GameAction]

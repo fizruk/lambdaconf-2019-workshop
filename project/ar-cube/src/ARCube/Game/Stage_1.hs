@@ -11,7 +11,7 @@ import           ARCube.Utils
 -- NOTE: remove _exercise and fix all type holes
 -- to complete this stage
 _exercise :: a
-_exercise = undefined
+_exercise = error "Exercise in Stage 1 is not implemented!"
 
 -- | Model of the game state (empty for now).
 data Game = Game

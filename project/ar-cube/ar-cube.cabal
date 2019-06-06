@@ -32,10 +32,13 @@ library
       ARCube.Game.Solution.Stage_2
       ARCube.Game.Solution.Stage_3
       ARCube.Game.Solution.Stage_4
+      ARCube.Game.Solution.Stage_5
       ARCube.Game.Stage_0
       ARCube.Game.Stage_1
       ARCube.Game.Stage_2
       ARCube.Game.Stage_3
+      ARCube.Game.Stage_4
+      ARCube.Game.Stage_5
       ARCube.Utils
       ARCube.Utils.AFrame
       ARCube.Utils.HaskellLogo
