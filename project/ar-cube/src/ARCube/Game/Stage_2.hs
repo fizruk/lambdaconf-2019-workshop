@@ -14,12 +14,12 @@ _exercise = error "Exercise in Stage 2 is not implemented!"
 
 -- | Model of the game state (empty for now).
 data Game = Game [Coords]
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 -- | Possible in-game actions (empty for now).
 data GameAction
   = SetMark Coords
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 -- | Coordinates of 3x3 cube cells.
 type Coords = (Int, Int, Int)

@@ -1,6 +1,6 @@
 module Main where
 
-import           ARCube.Client (Mode (..), run)
+import           ARCube.Standalone (Mode (..), run)
 
 main :: IO ()
 main = run AR

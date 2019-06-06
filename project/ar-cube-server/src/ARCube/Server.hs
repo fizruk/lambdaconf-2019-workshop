@@ -49,8 +49,6 @@ data Config = Config
   { configGame     :: TVar Game
   , configGamePrev :: TVar (Maybe Game)
   , configClients  :: TVar (Map PlayerName Client)
-  , configPlayer1  :: TVar (Maybe PlayerName)
-  , configPlayer2  :: TVar (Maybe PlayerName)
   , configNames    :: TVar [PlayerName]
   }
 
@@ -66,8 +64,6 @@ mkDefaultConfig = do
           <$> newTVar initGame
           <*> newTVar Nothing
           <*> newTVar Map.empty
-          <*> newTVar Nothing
-          <*> newTVar Nothing
           <*> newTVar (map show [1..])
   return cfg
 
@@ -94,16 +90,6 @@ addClient client Config{..} = do
     name:names <- readTVar configNames
     writeTVar configNames names
     modifyTVar configClients (Map.insert name client)
-
-    player1 <- readTVar configPlayer1
-    case player1 of
-      Nothing -> writeTVar configPlayer1 (Just name)
-      Just _ -> do
-        player2 <- readTVar configPlayer2
-        case player2 of
-          Nothing -> writeTVar configPlayer2 (Just name)
-          Just _  -> return ()
-
     return name
 
 -- | An infinite loop, receiving data from the 'Client'
@@ -112,22 +98,10 @@ handleActions :: PlayerName -> Connection -> Config -> IO ()
 handleActions name conn cfg@Config{..} = forever $ do
   action <- receiveData conn
   putStrLn ("Received action from client " ++ name ++ ": " ++ show action)
-  (game, isCurrentPlayer) <- atomically $ do
+  atomically $ do
     game <- readTVar configGame
-    isCurrentPlayer <-
-      case gCurrentPlayer game of
-        Player1 -> do
-          player1 <- readTVar configPlayer1
-          return (player1 == Just name)
-        Player2 -> do
-          player2 <- readTVar configPlayer2
-          return (player2 == Just name)
-    when isCurrentPlayer $ do
-      writeTVar configGame (handleGame action game)
-      writeTVar configGamePrev (Just game)
-    return (game, isCurrentPlayer)
-  when (not isCurrentPlayer) $ do
-    sendUpdate game cfg (name, conn)
+    writeTVar configGame (handleGame action game)
+    writeTVar configGamePrev (Just game)
 
 -- | Periodically update the 'Game' and send updates to all the clients.
 periodicUpdates :: Int -> Config -> IO ()
@@ -147,14 +121,13 @@ periodicUpdates ms cfg@Config{..} = forever $ do
 broadcastUpdate :: Game -> Config -> IO ()
 broadcastUpdate game cfg@Config{..} = do
   clients <- readTVarIO configClients
-  mapM_ (forkIO . sendUpdate game cfg) (Map.toList clients)
-
-sendUpdate :: Game -> Config -> (PlayerName, Client) -> IO ()
-sendUpdate game cfg@Config{..} (name, conn) = send name conn `catch` handleClosedConnection name
+  mapM_ (forkIO . sendUpdate) (Map.toList clients)
   where
-    send name conn = do
-      sendTextData conn game
-      putStrLn ("Sent update to client " ++ name)
+    sendUpdate (name, conn) = send name conn `catch` handleClosedConnection name
+      where
+        send name conn = do
+          sendTextData conn game
+          putStrLn ("Sent update to client " ++ name)
 
     handleClosedConnection :: PlayerName -> ConnectionException -> IO ()
     handleClosedConnection name _ = do
@@ -175,4 +148,3 @@ instance WebSocketsData Game where
 instance WebSocketsData GameAction where
   fromLazyByteString = read . BSL8.unpack
   toLazyByteString   = BSL8.pack . show
-

@@ -1,6 +1,7 @@
-{-# LANGUAGE EmptyCase         #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE EmptyCase          #-}
+{-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE StandaloneDeriving #-}
 module ARCube.Game.Stage_1 where
 
 import           Data.Function ((&))
@@ -15,10 +16,12 @@ _exercise = error "Exercise in Stage 1 is not implemented!"
 
 -- | Model of the game state (empty for now).
 data Game = Game
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 -- | Possible in-game actions (empty for now).
 data GameAction
+deriving instance Show GameAction
+deriving instance Read GameAction
 
 -- | Initialise game state.
 initGame :: Game
