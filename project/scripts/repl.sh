@@ -4,8 +4,8 @@
 set -e # exit on failure
 
 STATIC_SRC="$(pwd)/ar-cube-client/static/."
-STATIC_DST_VR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client-vr.jsexe/"
-STATIC_DST_AR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client-ar.jsexe/"
+STATIC_DST_VR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root --allow-different-user)/bin/ar-cube-client-vr.jsexe/"
+STATIC_DST_AR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root --allow-different-user)/bin/ar-cube-client-ar.jsexe/"
 
 echo -n "Deploying static files... "
 cp -r $STATIC_SRC $STATIC_DST_VR || true
@@ -14,5 +14,5 @@ echo "DONE"
 
 
 echo -n "Launching GHCi for (common + server)... "
-stack repl --stack-yaml=stack.yaml
+stack repl --stack-yaml=stack.yaml --allow-different-user
 echo "DONE"

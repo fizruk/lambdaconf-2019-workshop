@@ -8,6 +8,7 @@ STATIC_DST_AR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/
 STATIC_DST_VR="$(stack path --stack-yaml=stack-ghcjs.yaml --local-install-root)/bin/ar-cube-client-vr.jsexe/"
 
 stack build --stack-yaml=stack-ghcjs.yaml \
+  --allow-different-user \
   --file-watch --fast \
   --exec "cp -r $STATIC_SRC $STATIC_DST_VR" \
   --exec "cp -r $STATIC_SRC $STATIC_DST_AR"
