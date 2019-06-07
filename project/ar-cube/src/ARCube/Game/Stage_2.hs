@@ -57,5 +57,5 @@ cell :: Bool -> Coords -> [View GameAction]
 cell isMarked coords = scaled 0.9 0.9 0.9 (box
   [ prop_ "color"   _exercise -- Hint: this one depends on isMarked
   , prop_ "opacity" "0.5"
-  , _exercise -- Hint: see Miso.onClick and SetMark action
+  , onClick _exercise -- Hint: follow the types!
   ])
