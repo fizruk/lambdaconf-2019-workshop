@@ -34,8 +34,9 @@ handleGame = \case {}
 -- | How to render game in a VR/AR scene.
 renderGame :: Game -> [View GameAction]
 renderGame _ = cube3x3
-  & scaled 0.3 0.3 0.3
-  & rotated 30 60 0
+  & rotated 30 60 0     -- initial rotation just for fun
+  & translated 0 2.6 0  -- lift the cube so that it won't touch the surface when rotating
+  & scaled 0.3 0.3 0.3  -- scale to make entire cube about the size of the marker
 
 -- Exercise 1. Render a 3x3 cube using 'cell's.
 

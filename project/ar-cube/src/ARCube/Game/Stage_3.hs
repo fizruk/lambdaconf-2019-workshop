@@ -42,8 +42,9 @@ handleGame (SetMark coords) game = game
 -- | How to render game in a VR/AR scene.
 renderGame :: Game -> [View GameAction]
 renderGame game = cube3x3 game
-  & scaled 0.3 0.3 0.3
-  & rotated 30 60 0
+  & rotated 30 60 0     -- initial rotation just for fun
+  & translated 0 2.6 0  -- lift the cube so that it won't touch the surface when rotating
+  & scaled 0.3 0.3 0.3  -- scale to make entire cube about the size of the marker
 
 cube3x3 :: Game -> [View GameAction]
 cube3x3 game = concat

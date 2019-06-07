@@ -100,7 +100,8 @@ rotateCoords (SliceRotation axis d) (i, j, k) =
 -- | How to render game in a VR/AR scene.
 renderGame :: Game -> [View GameAction]
 renderGame game = cube3x3 game
-  & scaled 0.3 0.3 0.3
+  & translated 0 2.6 0  -- lift the cube so that it won't touch the surface when rotating
+  & scaled 0.3 0.3 0.3  -- scale to make entire cube about the size of the marker
 
 -- | Render 3x3 cube with interactive cells.
 cube3x3 :: Game -> [View GameAction]
