@@ -11,14 +11,14 @@ import           ARCube.Utils
 data Game = Game
   { gMarked :: [Coords]     -- ^ Marked cells.
   , gFocus  :: Maybe Coords -- ^ Cell in focus.
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Read)
 
 -- | Possible in-game actions (empty for now).
 data GameAction
   = SetMark Coords
   | SetFocus Coords
   | ResetFocus Coords
-  deriving (Eq, Show)
+  deriving (Eq, Show, Read)
 
 -- | Coordinates of 3x3 cube cells.
 type Coords = (Int, Int, Int)
