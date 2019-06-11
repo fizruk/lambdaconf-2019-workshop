@@ -19,7 +19,7 @@ sceneVR wrapped = nodeHtml "a-scene" []
     ] [ nodeHtml "a-cursor" [] [] ]
   , nodeHtml "a-sky" [ prop_ "color" "#CCDCEC" ] []
   , nodeHtml "a-entity"
-      [ prop_ "position" "0  0 -4.5"
+      [ prop_ "position" "0  0 -3"
       , prop_ "rotation" "90 0 0"
       ] wrapped
   ]
