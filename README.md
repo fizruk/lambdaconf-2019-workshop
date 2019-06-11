@@ -11,6 +11,15 @@ to get ready for the workshop ahead of time!
 It is still possible to set up everything at the workshop,
 but it can steal some time and leave you with less time to play around :)
 
+## How to install SSL certificates
+
+For the last stage, when you start using client-server communication
+via websockets you need to install SSL certificates on the client smartphones.
+
+Follow instructions in [`PREPARE_SSL.md`](PREPARE_SSL.md) to create and
+install certificates so that a true multiplayer is possible for a local
+server.
+
 ## Exercises
 
 This project is designed in a way that allows you to focus
@@ -102,3 +111,27 @@ The result should look like this:
 ### Stage 5∗ — two player client-server game
 
 **Goal:** enable client-server architecture to play with multiple devices.
+
+Client and server communicate via a websocket.
+To enable this communication on client, switch to `ARCube.Client`
+in [project/ar-cube-client/ar/Main.hs](project/ar-cube-client/ar/Main.hs)
+(and in VR version as well):
+
+```diff
+ module Main where
+ 
+-import           ARCube.Standalone (Mode (..), run)
++import           ARCube.Client (Mode (..), run)
+ 
+ main :: IO ()
+ main = run AR
+```
+
+To enable true multiplayer on server use `ARCube.Server_Stage_5`
+in [project/ar-cube-server/src/ARCube/Server/Main.hs](project/ar-cube-server/src/ARCube/Server/Main.hs):
+
+```haskell
+-import           ARCube.Server               (api, mkDefaultConfig,
++import           ARCube.Server_Stage_5       (api, mkDefaultConfig,
+                                               periodicUpdates, server)
+```
