@@ -130,7 +130,7 @@ in [project/ar-cube-client/ar/Main.hs](project/ar-cube-client/ar/Main.hs)
 To enable true multiplayer on server use `ARCube.Server_Stage_5`
 in [project/ar-cube-server/src/ARCube/Server/Main.hs](project/ar-cube-server/src/ARCube/Server/Main.hs):
 
-```haskell
+```diff
 -import           ARCube.Server               (api, mkDefaultConfig,
 +import           ARCube.Server_Stage_5       (api, mkDefaultConfig,
                                                periodicUpdates, server)
